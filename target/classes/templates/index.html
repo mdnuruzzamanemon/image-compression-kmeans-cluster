@@ -225,10 +225,12 @@
                             </div>
                             
                             <div class="form-group">
-                                <label for="clusters" class="form-label">Number of Clusters (Colors):</label>
-                                <input type="range" class="form-range" id="clusters" name="clusters" min="2" max="64" value="16" oninput="updateClusterValue()">
-                                <div class="text-center">
-                                    <span class="cluster-value"><span id="clusterValue">16</span> colors</span>
+                                <label for="clusters" class="form-label">Image Quality</label>
+                                
+                                <input type="range" class="form-range" id="clusters" name="clusters" min="2" max="64" value="16">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <small>Low</small>
+                                    <small>High</small>
                                 </div>
                                 <div class="form-text text-center mt-2">
                                     <i class="fas fa-info-circle me-1"></i> Lower values = More compression, fewer colors
@@ -304,10 +306,7 @@
             }
         }
         
-        function updateClusterValue() {
-            const value = document.getElementById('clusters').value;
-            document.getElementById('clusterValue').textContent = value;
-        }
+                // Function removed as we no longer display the cluster value
         
         // Drag and drop functionality
         const uploadBox = document.getElementById('uploadBox');
