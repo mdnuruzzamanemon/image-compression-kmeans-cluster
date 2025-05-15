@@ -1,4 +1,8 @@
-F:\project\ai\image-compression-app\src\main\java\com\kmeanscompression\controller\ImageCompressionController.java
-F:\project\ai\image-compression-app\src\main\java\com\kmeanscompression\model\Pixel.java
-F:\project\ai\image-compression-app\src\main\java\com\kmeanscompression\service\KMeansImageCompressor.java
-F:\project\ai\image-compression-app\src\main\java\com\kmeanscompression\KMeansCompressionApplication.java
+/home/farhan/projects/university/image-compression-kmeans-cluster/src/main/java/com/kmeanscompression/controller/ImageCompressionController.java
+/home/farhan/projects/university/image-compression-kmeans-cluster/src/main/java/com/kmeanscompression/model/Pixel.java
+/home/farhan/projects/university/image-compression-kmeans-cluster/src/main/java/com/kmeanscompression/controller/ViewController.java
+/home/farhan/projects/university/image-compression-kmeans-cluster/src/main/java/com/kmeanscompression/service/KMeansImageCompressor.java
+/home/farhan/projects/university/image-compression-kmeans-cluster/src/main/java/com/kmeanscompression/service/CompressionAnalyzer.java
+/home/farhan/projects/university/image-compression-kmeans-cluster/src/main/java/com/kmeanscompression/KMeansCompressionApplication.java
+/home/farhan/projects/university/image-compression-kmeans-cluster/src/main/java/com/kmeanscompression/config/WebConfig.java
+/home/farhan/projects/university/image-compression-kmeans-cluster/src/main/java/com/kmeanscompression/controller/AnalysisController.java

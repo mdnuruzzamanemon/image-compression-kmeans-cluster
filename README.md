@@ -1,168 +1,113 @@
-# 🖼️ K-Means Image Compression Application
+# K-Means Image Compression Analysis
 
-This web application compresses images using the **K-Means clustering algorithm** by reducing the number of unique colors in an image. Each pixel's RGB value is treated as a point in 3D space. By clustering similar colors and reassigning pixel values based on their cluster centroid, we achieve **smaller image file sizes** while preserving **visual quality**.
+This project demonstrates image compression using the K-means clustering algorithm. The implementation provides a web interface for compressing images and analyzing the compression results.
 
----
+## How K-means Image Compression Works
 
-## 🚀 Features
+K-means image compression reduces the number of colors in an image by clustering similar colors together and replacing each color with its cluster centroid.
 
-- 📤 Upload any image (JPG, PNG, etc.)
-- 🎛️ Select the number of colors (clusters) for compression
-- 🖼️ View original and compressed images side-by-side
-- 💾 Download both versions
-- 📊 See compression ratio and size comparison
-- 🔁 Option to compress another image
+### Algorithm Overview
 
----
+1. **Color Extraction**: Each pixel in the image is represented as a point in 3D RGB color space.
+2. **K-means Clustering**: The algorithm clusters the colors into 'k' groups by:
+   - Randomly selecting 'k' initial centroids (colors)
+   - Assigning each pixel to the nearest centroid
+   - Recalculating centroids as the average of all pixels in each cluster
+   - Repeating until convergence or a maximum number of iterations
+3. **Color Replacement**: Each pixel's color is replaced with the color of its cluster centroid.
 
-## 🛠️ Requirements
+### Advantages of K-means Compression
 
-Before you run the application, make sure you have:
+- **Significant Color Reduction**: Can reduce thousands of colors to a small palette (e.g., 8, 16, 32 colors)
+- **Content-Aware**: Creates a color palette optimized for the specific image
+- **Adjustable Quality**: 'k' parameter allows balancing between compression ratio and image quality
 
-- **Java JDK 11** or higher
-- **Apache Maven 3.6+**
-- A modern web browser (Chrome, Firefox, Edge, etc.)
+## Analysis Metrics
 
----
+The project provides several metrics to evaluate compression performance:
 
-## 📥 Installation Guide
+### Compression Ratio
 
-### 🔧 Step 1: Install Java
+The ratio of original file size to compressed file size. Higher values indicate better compression.
 
-#### 📌 Windows / macOS / Linux
+### PSNR (Peak Signal-to-Noise Ratio)
 
-1. Download Java JDK 11 or later from:
+Measures the quality of the compressed image compared to the original. Higher values (measured in dB) indicate better quality.
 
-   - [Oracle JDK](https://www.oracle.com/java/technologies/javase-downloads.html)
-   - [OpenJDK (free)](https://jdk.java.net/)
+### Processing Time
 
-2. Install it following the instructions for your OS.
+Time required to compress the image, which generally increases with higher 'k' values.
 
-3. Verify Java installation:
+### Color Reduction
+
+Percentage of unique colors removed from the original image.
+
+## Analysis Results and Patterns
+
+### Effect of K Value
+
+As the 'k' value increases:
+
+- **Compression Ratio**: Typically decreases (less compression)
+- **PSNR**: Typically increases (better quality)
+- **Processing Time**: Generally increases
+- **Color Reduction**: Decreases
+
+### Optimal K Value Selection
+
+The optimal 'k' value depends on the specific requirements:
+
+- For maximum compression: Lower 'k' values (8-16)
+- For better quality with reasonable compression: Medium 'k' values (32-64)
+- For high-quality reproduction: Higher 'k' values (128+)
+
+### Image Type Impact
+
+The effectiveness of K-means compression varies based on image content:
+
+- **Photos with smooth gradients**: Benefit from higher 'k' values
+- **Graphics with flat colors**: Can achieve good results with lower 'k' values
+- **High-contrast images**: Often need higher 'k' values to preserve details
+
+## How to Use This Tool
+
+1. Upload an image using the form
+2. Specify comma-separated 'k' values to analyze (e.g., 8,16,32,64,128)
+3. Click "Run Analysis"
+4. View the compression results including:
+   - Interactive charts comparing metrics across different 'k' values
+   - Detailed results table
+   - Original image information
+
+## Implementation Details
+
+The project is implemented in Java using the Spring Boot framework:
+
+- **K-means Clustering**: Custom implementation in Java
+- **Web Interface**: Spring Boot with Thymeleaf
+- **Visualization**: Chart.js for interactive graphs
+
+## Getting Started
+
+### Prerequisites
+
+- Java 11 or higher
+- Maven
+
+### Building and Running
 
 ```bash
-java -version
-```
-
-Expected output:
-
-```
-java version "11.x.x"
-```
-
----
-
-### 🔧 Step 2: Install Maven
-
-1. Download Maven from the official site:
-
-   - [Maven Download](https://maven.apache.org/download.cgi)
-
-2. Extract it and add the `bin/` directory to your system's `PATH`.
-
-3. Verify Maven installation:
-
-```bash
-mvn -v
-```
-
-Expected output:
-
-```
-Apache Maven 3.x.x
-```
-
----
-
-## ⚙️ Running the Application
-
-You can run the app in two ways:
-
-### ✅ Option 1: Package and Run as JAR
-
-```bash
-cd image-compression-app
-mvn clean package
-java -jar target/image-compression-app-0.0.1-SNAPSHOT.jar
-```
-
-### ✅ Option 2: Run Directly with Spring Boot
-
-```bash
-cd image-compression-app
+mvn clean install
 mvn spring-boot:run
 ```
 
-Once started, open your browser and go to:
+Access the application at: http://localhost:8080
 
-```
-http://localhost:8080
-```
+## Future Improvements
 
----
+Potential enhancements for this project:
 
-## 🧑‍💻 How to Use
-
-1. Upload an image file from your computer.
-2. Select the number of color clusters using the slider.
-3. Click **Compress Image**.
-4. Compare the original and compressed images displayed side by side.
-5. Download the images using the respective **Download** buttons.
-6. Click **Compress Another Image** to repeat the process.
-
----
-
-## 💡 How It Works (Technical Details)
-
-- Each pixel in the image is treated as a data point in **RGB color space (3D)**.
-- The **K-Means algorithm** groups these pixels into _K_ clusters.
-- Each cluster is assigned a centroid (mean RGB value).
-- Pixels are recolored based on their cluster's centroid.
-- The result is a visually similar image using only _K_ colors.
-
-### 🧱 Tech Stack
-
-| Component         | Technology                |
-| ----------------- | ------------------------- |
-| Backend           | Java, Spring Boot         |
-| Frontend          | Thymeleaf (HTML)          |
-| Image Processing  | Java AWT, ImageIO         |
-| Compression Logic | Custom K-Means Clustering |
-
----
-
-## 📊 Compression Benefit
-
-- The fewer the clusters, the fewer the colors → smaller file size.
-- Compression is **lossy** but optimized for visual similarity.
-- Especially effective on images with large areas of similar color.
-
----
-
-## 📎 Resources
-
-- [Spring Boot Documentation](https://spring.io/projects/spring-boot)
-- [K-Means Clustering – Wikipedia](https://en.wikipedia.org/wiki/K-means_clustering)
-- [Apache Maven](https://maven.apache.org/)
-- [Java ImageIO API](https://docs.oracle.com/javase/8/docs/api/javax/imageio/package-summary.html)
-
----
-
-## 📄 License
-
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
-
----
-
-## 🙋‍♂️ Support
-
-If you encounter any issues or want to contribute, feel free to create an issue or submit a pull request. Contributions are welcome!
-
----
-
-## 🎯 Future Improvements
-
-- Allow user-defined image formats for output
-- Support bulk image compression
-- Add real-time progress bar for large images
-- Enable mobile responsive UI
+- Side-by-side visual comparison of compressed images
+- Batch processing capabilities
+- Additional clustering methods (e.g., Median Cut, Octree)
+- Alternative distance metrics (e.g., LAB color space)
